@@ -7,4 +7,11 @@ body {
 	padding: 0;
 }
 
-a { color: rgb(103, 193, 245); }
+a {
+	text-decoration: none;
+	color: #66c0f4;
+}
+
+a:hover {
+	color: #ffffff;
+}
