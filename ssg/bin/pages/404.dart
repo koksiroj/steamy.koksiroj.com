@@ -5,7 +5,7 @@ import "package:ssg/components/head.dart";
 import "package:ssg/constants.dart";
 import "package:techs_html_bindings/elements.dart";
 
-Future<void> create404() async {
+void create404() {
   final String indexHTML = HTML(
     lang: "en",
     head: generateHead(

@@ -16,8 +16,8 @@ Future<void> main(List<String> arguments) async {
   copy("ssg/copy", "");
   copy("ssg/styles", "styles");
 
-  await createLanguageSelectPage();
-  await create404();
+  create404();
+  createLanguageSelectPage();
 
   log.info("Done with generation!");
 }

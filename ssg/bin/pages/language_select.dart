@@ -5,7 +5,7 @@ import "package:ssg/components/head.dart";
 import "package:ssg/constants.dart";
 import "package:techs_html_bindings/elements.dart";
 
-Future<void> createLanguageSelectPage() async {
+void createLanguageSelectPage() {
   final String indexHTML = HTML(
     lang: "en",
     head: generateHead(
@@ -13,12 +13,12 @@ Future<void> createLanguageSelectPage() async {
       description: "",
       extraStyles: ["language_select"],
     ),
-    body: await _generateBody(),
+    body: _generateBody(),
   ).build();
   File(p.join(dirBuild.path, "index.html")).writeAsStringSync(indexHTML);
 }
 
-Future<Body> _generateBody() async {
+Body _generateBody() {
   return Body(
     header: Header(children: []),
     main: Main(
