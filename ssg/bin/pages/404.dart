@@ -11,19 +11,7 @@ Future<void> create404() async {
     head: generateHead(
       title: "Page not found! | Steamy",
       description: "This page could not be found...",
-      extraInlineStyles: [
-        """
-h1 {
-	font-size: clamp(8em, min(20vw, 50vh), 20em);
-  margin: 0.1em 0;
-}
-
-h1, h2, p {
-	text-align: center;
-	border: none;
-}
-""".trim(),
-      ],
+      extraStyles: ["404"]
     ),
     body: Body(
       header: Header(children: []),

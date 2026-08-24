@@ -1,0 +1,9 @@
+h1 {
+	font-size: clamp(8em, min(20vw, 50vh), 20em);
+	margin: 0.1em 0;
+}
+
+h1, h2, p {
+	text-align: center;
+	border: none;
+}
