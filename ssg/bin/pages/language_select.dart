@@ -3,6 +3,7 @@ import "dart:io";
 import "package:path/path.dart" as p;
 import "package:ssg/components/head.dart";
 import "package:ssg/constants.dart";
+import "package:ssg/languages.dart";
 import "package:techs_html_bindings/elements.dart";
 
 void createLanguageSelectPage() {
@@ -25,10 +26,9 @@ Body _generateBody() {
       children: [
         UnorderedList(
           classes: ["langs"],
-          items: [
-            ListItem(children: [A.text("English", href: "en")]),
-            ListItem(children: [A.text("Nederlands", href: "nl")]),
-          ],
+          items: languages.map(
+            (l) => ListItem(children: [A.text(l.display, href: l.code)]),
+          ),
         ),
       ],
     ),

@@ -3,6 +3,8 @@ import "package:ssg/copy.dart";
 import "package:ssg/log.dart";
 
 import "pages/404.dart";
+import "pages/game.dart";
+import "pages/home.dart";
 import "pages/language_select.dart";
 
 Future<void> main(List<String> arguments) async {
@@ -18,6 +20,8 @@ Future<void> main(List<String> arguments) async {
 
   create404();
   createLanguageSelectPage();
+  createHomePages();
+  await createGamesPages();
 
   log.info("Done with generation!");
 }
