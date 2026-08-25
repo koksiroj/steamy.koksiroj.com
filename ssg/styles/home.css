@@ -1,0 +1,64 @@
+ul.games {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	gap: 10px;
+}
+
+ul.games > li {
+	list-style-type: none;
+}
+
+.game-card {
+	display: flex;
+	gap: 6px;
+
+	color: inherit;
+	background: #1D2C3A;
+}
+
+.game-card:hover {
+	background: #273949;
+}
+
+.game-card img {
+	display: block;
+	flex-shrink: 0;
+	max-width: 231px;
+	min-height: 0;
+	aspect-ratio: 77 / 29;
+}
+
+.game-content {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-top: 6px;
+	font-size: 12px;
+}
+
+.game-content {
+	display: flex;
+	flex-grow: 1;
+	padding: 7px;
+	gap: 2px;
+}
+
+.game-content-column {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.game-price {
+	justify-content: flex-end;
+	flex: 0 0 auto;
+	white-space: nowrap;
+}
+
+.game-price p {
+	padding: 8px;
+	background: #1D2834;
+}

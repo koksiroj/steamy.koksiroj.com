@@ -18,16 +18,21 @@ Future<void> createGamesPages() async {
 }
 
 Future<void> _createGamePage(Language language, Directory dirGame) async {
-  final fileTitle = File(p.join(dirGame.path, "title.txt"));
-  final title = fileTitle.readAsStringSync().trim();
-  final fileDescription = File(p.join(dirGame.path, "description.txt"));
-  final description = fileDescription.readAsStringSync().trim();
   final name = p.basename(dirGame.path);
   if (name.contains(RegExp(r"\s"))) {
     throw Exception("Folder `${dirGame.path}` contains whitespace, which is not allowed in URLs!");
   }
-
   final dirBuildGame = Directory(p.join(dirBuild.path, language.code, name))..createSync();
+  final fileCapsuleSmall = File(p.join(dirGame.path, "store_capsule_small.jpg"));
+  await fileCapsuleSmall.copy(p.join(dirBuildGame.path, p.basename(fileCapsuleSmall.path)));
+  if (File(p.join(dirGame.path, "link.txt")).existsSync()) return;
+
+
+  final fileTitle = File(p.join(dirGame.path, "title.txt"));
+  final title = fileTitle.readAsStringSync().trim();
+  final fileDescription = File(p.join(dirGame.path, "description.txt"));
+  final description = fileDescription.readAsStringSync().trim();
+
   final String indexHTML = HTML(
     lang: language.code,
     head: generateHead(
@@ -55,7 +60,7 @@ Future<Main> _generateMain(Directory dirGame, Directory dirBuildGame) async {
   final title = fileTitle.readAsStringSync().trim();
   elements.add(H1.text(title));
 
-  elements.add(Image(src: "header.jpg", alt: ""));
+  elements.add(Image(src: "store_capsule_header.jpg", alt: ""));
 
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
   final description = fileDescription.readAsStringSync().trim();
