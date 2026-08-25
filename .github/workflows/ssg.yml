@@ -37,10 +37,10 @@ jobs:
         uses: dart-lang/setup-dart@v1
 
       - name: Download SSG dependencies
-        run: dart pub get
+        run: cd ssg && dart pub get
 
       - name: Build the Website
-        run: dart run bin/main.dart
+        run: dart run ssg/bin/main.dart
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
