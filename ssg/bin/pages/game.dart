@@ -22,9 +22,12 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
   final title = fileTitle.readAsStringSync().trim();
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
   final description = fileDescription.readAsStringSync().trim();
+  final name = p.basename(dirGame.path);
+  if (name.contains(RegExp(r"\s"))) {
+    throw Exception("Folder `${dirGame.path}` contains whitespace, which is not allowed in URLs!");
+  }
 
-  final dirBuildGame = Directory(p.join(dirBuild.path, language.code, p.basename(dirGame.path)))
-    ..createSync();
+  final dirBuildGame = Directory(p.join(dirBuild.path, language.code, name))..createSync();
   final String indexHTML = HTML(
     lang: language.code,
     head: generateHead(
