@@ -27,7 +27,6 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
   await fileCapsuleSmall.copy(p.join(dirBuildGame.path, p.basename(fileCapsuleSmall.path)));
   if (File(p.join(dirGame.path, "link.txt")).existsSync()) return;
 
-
   final fileTitle = File(p.join(dirGame.path, "title.txt"));
   final title = fileTitle.readAsStringSync().trim();
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
@@ -58,18 +57,45 @@ Future<Main> _generateMain(Directory dirGame, Directory dirBuildGame) async {
 
   final fileTitle = File(p.join(dirGame.path, "title.txt"));
   final title = fileTitle.readAsStringSync().trim();
-  elements.add(H1.text(title));
-
-  elements.add(Image(src: "store_capsule_header.jpg", alt: ""));
+  elements.add(H1.text(title, classes: ["page-content"]));
 
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
   final description = fileDescription.readAsStringSync().trim();
-  elements.add(P.text(description));
+
+  final fileTags = File(p.join(dirGame.path, "tags.txt"));
+  final tags = fileTags.readAsStringSync().trim().split(",").map((e) => e.trim());
+
+  elements.add(
+    Div(
+      classes: ["game-highlights", "page-content"],
+      children: [
+        Div(
+          classes: ["right-column"],
+          children: [
+            Image(src: "store_capsule_header.jpg", alt: ""),
+            P.text(description),
+            UnorderedList(items: tags.map(ListItem.text), classes: ["tags"]),
+          ],
+        ),
+        Div(
+          classes: ["left-column"],
+          children: [],
+        ),
+      ],
+    ),
+  );
+
+  elements.add(Hr());
 
   final fileAbout = File(p.join(dirGame.path, "about.md"));
   final about = fileAbout.readAsStringSync();
   final mdAbout = markdown(about);
-  elements.addAll(mdAbout);
+  elements.add(
+    Div(
+      classes: ["about", "page-content"],
+      children: mdAbout,
+    ),
+  );
 
   //Copy linked images
   final List<Image> images = [];

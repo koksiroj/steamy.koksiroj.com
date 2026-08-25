@@ -1,0 +1,85 @@
+.page-content {
+	max-width: 1200px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.game-highlights {
+	display: flex;
+	flex-direction: row-reverse;
+	column-gap: 16px;
+}
+
+.right-column {
+	width: 375px;
+	flex-grow: 0;
+	flex-shrink: 0;
+}
+
+.right-column img {
+	width: 375px;
+	height: unset;
+}
+
+.left-column {
+	max-width: 824px;
+	min-width: 0;
+	width: auto;
+	flex-grow: 1;
+	flex-shrink: 1;
+
+	background: #111720;
+}
+
+@media screen and (max-width: 910px) {
+	.game-highlights {
+		width: auto;
+		height: auto;
+		flex-direction: column;
+	}
+
+	.right-column {
+		width: auto;
+		height: auto;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.right-column img {
+		display: block;
+		width: 100%;
+	}
+}
+
+ul.tags {
+	list-style-type: none;
+}
+
+.tags {
+	display: flex;
+	column-gap: 2px;
+	row-gap: 3px;
+}
+
+.tags li {
+	padding: 0 7px;
+	color: #67c1f5;
+	background-color: rgba(103, 193, 245, 0.2);
+	cursor: pointer;
+	border-radius: 2px;
+	max-width: 200px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.tags li:hover {
+	color: #ffffff;
+	background: linear-gradient(135deg, #67c1f5 0%, #417a9b 100%);
+}
+
+.about img,
+.about video {
+	display: block;
+	max-width: 100%;
+}
