@@ -19,7 +19,7 @@ void create404() {
         children: [
           H1.text("404"),
           P.text("This page could not be found!"),
-          H2.text("Please double-check your URL.", autoLink: false),
+          H2.text("Please double-check your URL."),
           P(
             children: [
               T("Or go back to the "),

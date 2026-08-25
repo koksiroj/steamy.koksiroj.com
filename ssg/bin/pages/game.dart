@@ -33,7 +33,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
     head: generateHead(
       title: "$title | Steamy",
       description: description,
-      extraStyles: ["game", "autolink"],
+      extraStyles: ["game"],
     ),
     body: await _generateBody(dirGame, dirBuildGame),
   ).build();
