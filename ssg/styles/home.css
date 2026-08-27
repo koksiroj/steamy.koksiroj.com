@@ -1,3 +1,19 @@
+:root {
+	--page-background: #0f1924;
+	--light-fg: rgba(255, 255, 255, 0.8);
+	--midlight-fg: rgba(255, 255, 255, 0.5);
+}
+
+html {
+	background: var(--page-background) !important;
+}
+
+ul.games {
+	max-width: 1300px;
+	margin: 0 auto;
+	padding: 15px 50px;
+}
+
 ul.games {
 	display: flex;
 	flex-direction: column;
@@ -50,6 +66,24 @@ ul.games > li {
 	gap: 2px;
 	flex: 1 1 auto;
 	min-width: 0;
+}
+
+.game-info h3 {
+	font-size: 16px;
+	color: #FFF;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.game-info .tags {
+	color: var(--light-fg);
+	font-size: 12px;
+	text-wrap: nowrap;
+}
+
+.game-info .released {
+	margin-top: auto;
+	color: var(--midlight-fg);
 }
 
 .game-price {

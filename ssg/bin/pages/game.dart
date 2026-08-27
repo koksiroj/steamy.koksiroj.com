@@ -31,6 +31,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
   final title = fileTitle.readAsStringSync().trim();
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
   final description = fileDescription.readAsStringSync().trim();
+  final translations = Translations(File(p.join(language.directory.path, "translations.yaml")));
 
   final String indexHTML = HTML(
     lang: language.code,
@@ -39,20 +40,28 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
       description: description,
       extraStyles: ["game"],
     ),
-    body: await _generateBody(dirGame, dirBuildGame),
+    body: await _generateBody(dirGame, dirBuildGame, translations),
   ).build();
   File(p.join(dirBuildGame.path, "index.html")).writeAsStringSync(indexHTML);
 }
 
-Future<Body> _generateBody(Directory dirGame, Directory dirBuildGame) async {
+Future<Body> _generateBody(
+  Directory dirGame,
+  Directory dirBuildGame,
+  Translations translations,
+) async {
   return Body(
     header: Header(children: []),
-    main: await _generateMain(dirGame, dirBuildGame),
+    main: await _generateMain(dirGame, dirBuildGame, translations),
     footer: Footer(children: []),
   );
 }
 
-Future<Main> _generateMain(Directory dirGame, Directory dirBuildGame) async {
+Future<Main> _generateMain(
+  Directory dirGame,
+  Directory dirBuildGame,
+  Translations translations,
+) async {
   final List<Element> elements = [];
 
   final fileTitle = File(p.join(dirGame.path, "title.txt"));
@@ -61,6 +70,9 @@ Future<Main> _generateMain(Directory dirGame, Directory dirBuildGame) async {
 
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
   final description = fileDescription.readAsStringSync().trim();
+
+  final fileReleaseDate = File(p.join(dirGame.path, "release_date.txt"));
+  final String releaseDate = fileReleaseDate.readAsStringSync().trim();
 
   final fileTags = File(p.join(dirGame.path, "tags.txt"));
   final tags = fileTags.readAsStringSync().trim().split(",").map((e) => e.trim());
@@ -74,6 +86,14 @@ Future<Main> _generateMain(Directory dirGame, Directory dirBuildGame) async {
           children: [
             Image(src: "store_capsule_header.jpg", alt: ""),
             P.text(description),
+            Div(
+              classes: ["detail"],
+              children: [
+                Span.text("${translations["release-date"]}:", classes: ["detail-key"]),
+                Span.text(releaseDate, classes: ["detail-value"]),
+              ],
+            ),
+            Span.text("${translations["tags"]}:", classes: ["detail-key"]),
             UnorderedList(items: tags.map(ListItem.text), classes: ["tags"]),
           ],
         ),
@@ -93,7 +113,10 @@ Future<Main> _generateMain(Directory dirGame, Directory dirBuildGame) async {
   elements.add(
     Div(
       classes: ["about", "page-content"],
-      children: mdAbout,
+      children: [
+        H2.text(translations["about"]),
+        ...mdAbout,
+      ],
     ),
   );
 

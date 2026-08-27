@@ -19,3 +19,25 @@ final List<Language> languages = List.unmodifiableOf(
     return Language(code: parts[0], display: parts[1], directory: dir);
   }),
 );
+
+class Translations {
+  final File file;
+  final Map<String, String> keys;
+
+  new(this.file)
+    : keys = Map.unmodifiableOf(
+        Map.fromEntries(
+          file.readAsStringSync().split("\n").where((str) => str.trim().isNotEmpty).map(
+            (String line) {
+              final parts = line.split(":").map((str) => str.trim()).toList();
+              return MapEntry(parts[0], parts[1]);
+            },
+          ),
+        ),
+      );
+
+  String operator [](String key) {
+    return keys[key] ??
+        (throw Exception("Translation File `${file.path}` did not have a translation for `$key`!"));
+  }
+}

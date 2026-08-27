@@ -21,6 +21,24 @@
 	height: unset;
 }
 
+.right-column .detail {
+	margin-top: 16px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.right-column .detail-key {
+	text-transform: uppercase;
+	font-size: 11px;
+	color: #798a95;
+}
+
+.right-column .detail-value {
+	line-height: 18px;
+	font-size: 13px;
+	color: #8f98a0;
+}
+
 .left-column {
 	max-width: 824px;
 	min-width: 0;

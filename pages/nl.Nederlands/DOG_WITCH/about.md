@@ -1,5 +1,3 @@
-## Over dit spel
-
 **DOG WITCH** combineert het beste van dobbelsteen-roguelikes en kaartspellen in één waanzinnig strategiespel.
 Tijdens de snelle runs gebruik je diverse item-sets, ontdek je nieuwe synergiën en neem je het op tegen allerlei verschillende vijanden,
 waarbij je telkens weer slim te werk moet gaan.

@@ -1,5 +1,3 @@
-## About This Game
-
 **DOG WITCH** combines the best of dice-driven roguelikes and deckbuilders to deliver a rich strategic experience.
 With quick runs, you’ll harness diverse item sets, discover new synergies and face a wide variety of wild enemy encounters,
 each requiring clever thinking to master.

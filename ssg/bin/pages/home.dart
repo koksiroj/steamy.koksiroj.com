@@ -49,6 +49,7 @@ Body _generateBody(Language language) {
     }
     return 0;
   });
+  final translations = Translations(File(p.join(language.directory.path, "translations.yaml")));
   return Body(
     header: Header(children: []),
     main: Main(
@@ -65,12 +66,19 @@ Body _generateBody(Language language) {
               link = fileLink.readAsStringSync().trim();
               final uri = Uri.parse(link); //verify that it's an actual proper link
               if (uri.authority != "store.steampowered.com") {
-                throw Exception("The URL in `${fileLink.path} is not a valid `store.steampowered.com` URL!");
+                throw Exception(
+                  "The URL in `${fileLink.path} is not a valid `store.steampowered.com` URL!",
+                );
               }
             } else {
               link = p.basename(dir.path);
             }
-            return _gameCard(title: title, link: link, dir: dir);
+            return _gameCard(
+              title: title,
+              link: link,
+              dir: dir,
+              translations: translations,
+            );
           }),
         ),
       ],
@@ -83,6 +91,7 @@ ListItem _gameCard({
   required String title,
   required String link,
   required Directory dir,
+  required Translations translations,
 }) {
   final fileTags = File(p.join(dir.path, "tags.txt"));
   final String tags = fileTags.readAsStringSync().trim();
@@ -102,8 +111,8 @@ ListItem _gameCard({
                 classes: ["game-content-column", "game-info"],
                 children: [
                   H3.text(title),
-                  P.text(tags),
-                  P.text(releaseDate),
+                  P.text(tags, classes: ["tags"]),
+                  P.text("${translations["released"]}: $releaseDate", classes: ["released"]),
                 ],
               ),
               Div(
