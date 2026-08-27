@@ -2,6 +2,7 @@ import "dart:io";
 
 import "package:path/path.dart" as p;
 import "package:ssg/components/head.dart";
+import "package:ssg/components/header.dart";
 import "package:ssg/constants.dart";
 import "package:ssg/languages.dart";
 import "package:techs_html_bindings/elements.dart";
@@ -18,7 +19,7 @@ void _createHomePage(Language language) {
     head: generateHead(
       title: "Steamy Store",
       description: "",
-      extraStyles: ["home"],
+      extraStyles: ["header", "home"],
     ),
     body: _generateBody(language),
   ).build();
@@ -51,7 +52,7 @@ Body _generateBody(Language language) {
   });
   final translations = Translations(File(p.join(language.directory.path, "translations.yaml")));
   return Body(
-    header: Header(children: []),
+    header: generateHeader(translations),
     main: Main(
       children: [
         UnorderedList(

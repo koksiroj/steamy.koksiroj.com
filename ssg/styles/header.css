@@ -1,0 +1,69 @@
+header {
+	background: #171d25;
+}
+
+header .content {
+	display: flex;
+	height: 104px;
+	align-items: center;
+
+	max-width: var(--store-page-width);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+header .branding {
+	margin-right: 150px;
+}
+
+header .tab-links {
+	display: flex;
+	gap: 16px;
+}
+
+header .tab-links a {
+	font-size: 16px;
+	line-height: 16px;
+	font-weight: 500;
+	text-transform: uppercase;
+	color: #dcdedf;
+}
+
+header .tab-links a:hover {
+	color: #fff;
+}
+
+header .tab-links a:first-of-type {
+	color: #1a9fff;
+
+	&::after {
+		content: "";
+		display: block;
+		width: 100%;
+		height: 2.5px;
+		background: #1a9fff;
+		border-radius: 3px;
+		animation: slide 0.1s;
+		margin-top: 2px;
+	}
+}
+
+header .langs {
+	margin-left: auto;
+	align-self: start;
+
+	color: #b8b6b4;
+	font-size: 11px;
+
+	margin-top: 10px;
+	padding-left: 5px;
+	padding-right: 18px;
+	background-image: url('/icons/btn_arrow_down_padded.png');
+	background-position: right center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+header .langs:hover {
+	color: #fff;
+}

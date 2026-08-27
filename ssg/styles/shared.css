@@ -1,3 +1,7 @@
+:root {
+	--store-page-width: 1200px;
+}
+
 * {
 	margin: 0;
 	padding: 0;
@@ -8,9 +12,7 @@ html {
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	font-family: "Motiva Sans", sans-serif;
+	font-family: "Motiva Sans", "Arial", "Helvetica", "Noto Sans", "Twemoji", sans-serif;
 }
 
 a {

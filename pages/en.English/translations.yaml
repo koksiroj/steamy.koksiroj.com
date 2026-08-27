@@ -1,4 +1,12 @@
-about: About This Game
+header-store: Store
+header-community: Community
+header-about: About
+header-support: Support
+
+header-language: language
+
+
+about-game: About This Game
 released: Released
 release-date: Release Date
 tags: Tags
