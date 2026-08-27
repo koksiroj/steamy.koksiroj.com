@@ -27,12 +27,20 @@ class Translations {
   new(this.file)
     : keys = Map.unmodifiableOf(
         Map.fromEntries(
-          file.readAsStringSync().split("\n").where((str) => str.trim().isNotEmpty).map(
-            (String line) {
-              final parts = line.split(":").map((str) => str.trim()).toList();
-              return MapEntry(parts[0], parts[1]);
-            },
-          ),
+          file
+              .readAsStringSync()
+              .split("\n")
+              .where((str) => str.trim().isNotEmpty)
+              .where((str) => !str.startsWith(RegExp(r"\s*#|//")))
+              .map(
+                (String line) {
+                  final int colonIndex = line.indexOf(":");
+                  return MapEntry(
+                    line.substring(0, colonIndex).trim(),
+                    line.substring(colonIndex + 1).trim(),
+                  );
+                },
+              ),
         ),
       );
 
