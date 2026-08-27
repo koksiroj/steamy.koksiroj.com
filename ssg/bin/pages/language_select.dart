@@ -13,6 +13,7 @@ void createLanguageSelectPage() {
       title: "Steamy Language Select",
       description: "",
       extraStyles: ["language_select"],
+      scriptFiles: ["auto-lang.js"],
     ),
     body: _generateBody(),
   ).build();

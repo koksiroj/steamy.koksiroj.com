@@ -7,6 +7,7 @@ Head generateHead({
   List<String> extraStyles = const [],
   List<Link> extraLinks = const [],
   List<String> extraInlineStyles = const [],
+  List<String> scriptFiles = const [],
 }) {
   return Head(
     title: title,
@@ -32,6 +33,22 @@ Head generateHead({
     styles: [
       Style(css: "html { background: #1B2838; }"),
       ...extraInlineStyles.map((str) => Style(css: str)),
+      ...scriptFiles.map((filePath) => ScriptFile(src: filePath)),
     ],
   );
+}
+
+// Hack to make JS insertable...
+class ScriptFile extends Style {
+  String src;
+
+  ScriptFile({required this.src}) : super(css: "");
+
+  @override
+  String build() {
+    return '<script src="$src" defer></script>';
+  }
+
+  @override
+  Style clone() => ScriptFile(src: src);
 }
