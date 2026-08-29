@@ -1,7 +1,13 @@
 const langSelect = document.querySelector("header .lang");
 const langPopup = document.querySelector("header .lang-popup");
 if (langSelect !== null && langPopup !== null) {
-	langSelect.addEventListener("click", () => {
-		langPopup.classList.toggle("active");
+	document.addEventListener("click", (event) => {
+		const clickedElement = event.target;
+		if (langPopup.contains(clickedElement)) {
+		} else if (clickedElement === langSelect) {
+			langPopup.classList.toggle("active");
+		} else {
+			langPopup.classList.remove("active");
+		}
 	});
 }
