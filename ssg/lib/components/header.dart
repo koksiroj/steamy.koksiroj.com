@@ -31,9 +31,10 @@ Header generateHeader(
             ],
           ),
           if (languageLinks.length > 1) ...[
-            Span.text(
+            A.text(
               classes: ["lang"],
               translations["header-language"],
+              href: "#",
             ),
             UnorderedList(
               classes: ["lang-popup"],

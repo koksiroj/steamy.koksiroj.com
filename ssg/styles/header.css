@@ -62,6 +62,7 @@ header .lang {
 	background-position: right center;
 	background-repeat: no-repeat;
 	cursor: pointer;
+	user-select: none;
 }
 
 header .lang:hover {
@@ -73,7 +74,7 @@ header .content {
 }
 
 header .lang-popup {
-	display: block;
+	display: none;
 
 	position: absolute;
 	top: 25px;
@@ -84,6 +85,10 @@ header .lang-popup {
 	background-color: #3D4450;
 
 	box-shadow: 0 0 12px #000000;
+}
+
+header .lang-popup.active {
+	display: block;
 }
 
 header ul.lang-popup {

@@ -20,6 +20,7 @@ void _createHomePage(Language language) {
       title: "Steamy Store",
       description: "",
       extraStyles: ["header", "home"],
+      scriptFiles: ["/lang-select.js"],
     ),
     body: _generateBody(language),
   ).build();

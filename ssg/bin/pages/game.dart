@@ -40,6 +40,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
       title: "$title | Steamy",
       description: description,
       extraStyles: ["header", "game"],
+      scriptFiles: ["/lang-select.js"],
     ),
     body: await _generateBody(dirGame, dirBuildGame, language, translations),
   ).build();
