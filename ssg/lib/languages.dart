@@ -21,13 +21,13 @@ final List<Language> languages = List.unmodifiableOf(
 );
 
 class Translations {
-  final File file;
-  final Map<String, String> keys;
+  final File _file;
+  final Map<String, String> _keys;
 
-  new(this.file)
-    : keys = Map.unmodifiableOf(
+  new(this._file)
+    : _keys = Map.unmodifiableOf(
         Map.fromEntries(
-          file
+          _file
               .readAsStringSync()
               .split("\n")
               .where((str) => str.trim().isNotEmpty)
@@ -45,7 +45,9 @@ class Translations {
       );
 
   String operator [](String key) {
-    return keys[key] ??
-        (throw Exception("Translation File `${file.path}` did not have a translation for `$key`!"));
+    return _keys[key] ??
+        (throw Exception(
+          "Translation File `${_file.path}` did not have a translation for `$key`!",
+        ));
   }
 }
