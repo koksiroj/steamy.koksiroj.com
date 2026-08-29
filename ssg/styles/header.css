@@ -48,7 +48,7 @@ header .tab-links a:first-of-type {
 	}
 }
 
-header .langs {
+header .lang {
 	margin-left: auto;
 	align-self: start;
 
@@ -64,6 +64,41 @@ header .langs {
 	cursor: pointer;
 }
 
-header .langs:hover {
+header .lang:hover {
 	color: #fff;
+}
+
+header .content {
+	position: relative;
+}
+
+header .lang-popup {
+	display: block;
+
+	position: absolute;
+	top: 25px;
+	right: 0;
+	z-index: 200;
+
+	border: 1px solid #3D4450;
+	background-color: #3D4450;
+
+	box-shadow: 0 0 12px #000000;
+}
+
+header ul.lang-popup {
+	list-style-type: none;
+}
+
+header .lang-popup li a {
+	display: block;
+	padding: 5px 12px;
+	font-size: 12px;
+	color: #dcdedf;
+}
+
+header .lang-popup li:hover a {
+	color: #171d25;
+	text-decoration: none;
+	background: #dcdedf;
 }

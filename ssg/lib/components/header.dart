@@ -1,14 +1,21 @@
 import "package:ssg/languages.dart";
 import "package:techs_html_bindings/elements.dart";
 
-Header generateHeader(Translations translations) {
+Header generateHeader(
+  Language language,
+  Translations translations, {
+  List<A> languageLinks = const [],
+}) {
+  if (languageLinks.length > 1) {
+    languageLinks.sort((a, b) => a.innerText.compareTo(b.innerText));
+  }
   return Header(
     children: [
       Div(
         classes: ["content"],
         children: [
           A(
-            href: "/en",
+            href: "/${language.code}",
             children: [
               T("Steamy"),
             ],
@@ -17,13 +24,22 @@ Header generateHeader(Translations translations) {
           Div(
             classes: ["tab-links"],
             children: [
-              A.text(translations["header-store"], href: "#"),
+              A.text(translations["header-store"], href: "/${language.code}"),
               A.text(translations["header-community"], href: "#"),
               A.text(translations["header-about"], href: "#"),
               A.text(translations["header-support"], href: "#"),
             ],
           ),
-          A.text(translations["header-language"], href: "#", classes: ["langs"]),
+          if (languageLinks.length > 1) ...[
+            Span.text(
+              classes: ["lang"],
+              translations["header-language"],
+            ),
+            UnorderedList(
+              classes: ["lang-popup"],
+              items: languageLinks.map((a) => ListItem(children: [a])),
+            ),
+          ],
         ],
       ),
     ],

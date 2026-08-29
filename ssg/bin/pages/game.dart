@@ -41,7 +41,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
       description: description,
       extraStyles: ["header", "game"],
     ),
-    body: await _generateBody(dirGame, dirBuildGame, translations),
+    body: await _generateBody(dirGame, dirBuildGame, language, translations),
   ).build();
   File(p.join(dirBuildGame.path, "index.html")).writeAsStringSync(indexHTML);
 }
@@ -49,10 +49,23 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
 Future<Body> _generateBody(
   Directory dirGame,
   Directory dirBuildGame,
+  Language language,
   Translations translations,
 ) async {
+  final List<A> otherLanguages = [];
+  for (final Language language in languages) {
+    final Directory dirOtherGame = Directory(
+      p.join(language.directory.path, p.basename(dirGame.path)),
+    );
+    if (dirOtherGame.existsSync()) {
+      otherLanguages.add(
+        A.text(language.display, href: "/${language.code}/${p.basename(dirGame.path)}"),
+      );
+    }
+  }
+
   return Body(
-    header: generateHeader(translations),
+    header: generateHeader(language, translations, languageLinks: otherLanguages),
     main: await _generateMain(dirGame, dirBuildGame, translations),
     footer: Footer(children: []),
   );

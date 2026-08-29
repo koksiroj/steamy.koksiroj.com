@@ -52,7 +52,11 @@ Body _generateBody(Language language) {
   });
   final translations = Translations(File(p.join(language.directory.path, "translations.yaml")));
   return Body(
-    header: generateHeader(translations),
+    header: generateHeader(
+      language,
+      translations,
+      languageLinks: languages.map((lang) => A.text(lang.display, href: "/${lang.code}")).toList(),
+    ),
     main: Main(
       children: [
         UnorderedList(
