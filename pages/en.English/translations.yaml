@@ -1,12 +1,19 @@
+# The "Tabs" at the top, in the header
 header-store: Store
 header-community: Community
 header-about: About
 header-support: Support
 
+# The language selection dropdown
 header-language: language
 
 
-about-game: About This Game
+# Store page's release date
 released: Released
+
+# Labels for the game highlights' details
 release-date: Release Date
 tags: Tags
+
+# Heading for the "About This Game" section
+about-game: About This Game

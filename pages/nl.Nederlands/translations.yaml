@@ -1,12 +1,19 @@
+# The "Tabs" at the top, in the header
 header-store: Winkel
 header-community: Community
 header-about: Over
 header-support: Ondersteuning
 
+# The language selection dropdown
 header-language: taal
 
 
-about-game: Over dit spel
+# Store page's release date
 released: Uitgegeven
+
+# Labels for the game highlights' details
 release-date: Uitgavedatum
 tags: Tags
+
+# Heading for the "About This Game" section
+about-game: Over dit spel
