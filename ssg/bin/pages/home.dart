@@ -101,8 +101,13 @@ ListItem _gameCard({
 }) {
   final fileTags = File(p.join(dir.path, "tags.txt"));
   final String tags = fileTags.readAsStringSync().trim();
+
   final fileReleaseDate = File(p.join(dir.path, "release_date.txt"));
   final String releaseDate = fileReleaseDate.readAsStringSync().trim();
+
+  final filePrice = File(p.join(dir.path, "price.txt"));
+  final String price = filePrice.readAsStringSync().trim();
+
   return ListItem(
     children: [
       A(
@@ -124,7 +129,7 @@ ListItem _gameCard({
               Div(
                 classes: ["game-content-column", "game-price"],
                 children: [
-                  P.text("12,34€"),
+                  P.text(price),
                 ],
               ),
             ],
