@@ -58,7 +58,7 @@ header .lang {
 	margin-top: 10px;
 	padding-left: 5px;
 	padding-right: 18px;
-	background-image: url('/icons/btn_arrow_down_padded.png');
+	background-image: url("/steam_assets/btn_arrow_down_padded.png");
 	background-position: right center;
 	background-repeat: no-repeat;
 	cursor: pointer;

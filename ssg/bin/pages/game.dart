@@ -77,11 +77,8 @@ Future<Main> _generateMain(
   Directory dirBuildGame,
   Translations translations,
 ) async {
-  final List<Element> elements = [];
-
   final fileTitle = File(p.join(dirGame.path, "title.txt"));
   final title = fileTitle.readAsStringSync().trim();
-  elements.add(H1.text(title, classes: ["page-content"]));
 
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
   final description = fileDescription.readAsStringSync().trim();
@@ -92,45 +89,96 @@ Future<Main> _generateMain(
   final fileTags = File(p.join(dirGame.path, "tags.txt"));
   final tags = fileTags.readAsStringSync().trim().split(",").map((e) => e.trim());
 
+  final fileBreadcrumb = File(p.join(dirGame.path, "breadcrumb.txt"));
+  final breadcrumb = fileBreadcrumb.readAsStringSync().trim();
+
+  final List<Element> elements = [];
+
   elements.add(
     Div(
-      classes: ["game-highlights", "page-content"],
+      classes: ["top-area"],
       children: [
         Div(
-          classes: ["right-column"],
+          classes: ["game-page_background"],
           children: [
-            Image(src: "store_capsule_header.jpg", alt: ""),
-            P.text(description),
-            Div(
-              classes: ["detail"],
-              children: [
-                Span.text("${translations["release-date"]}:", classes: ["detail-key"]),
-                Span.text(releaseDate, classes: ["detail-value"]),
-              ],
-            ),
-            Span.text("${translations["tags"]}:", classes: ["detail-key"]),
-            UnorderedList(items: tags.map(ListItem.text), classes: ["tags"]),
+            Image(classes: ["game-colour"], src: "store_page_background.jpg", alt: ""),
+            Image(classes: ["game-texture"], src: "store_page_background.jpg", alt: ""),
           ],
         ),
         Div(
-          classes: ["left-column"],
-          children: [],
+          classes: ["title-area", "page-content"],
+          children: [
+            Div(
+              classes: ["breadcrumbs"],
+              children: [
+                Span.text(translations["breadcrumb-all-games"]),
+                T(">"),
+                Span.text(breadcrumb),
+                T(">"),
+                Span.text(title),
+              ],
+            ),
+            H1.text(title),
+          ],
+        ),
+        Div(
+          classes: ["game-background-glow"],
+          children: [
+            Div(
+              classes: ["game-highlights", "page-content"],
+              children: [
+                Div(
+                  classes: ["right-column"],
+                  children: [
+                    Image(src: "store_capsule_header.jpg", alt: ""),
+                    P.text(description),
+                    Div(
+                      classes: ["detail"],
+                      children: [
+                        Span.text("${translations["release-date"]}:", classes: ["detail-key"]),
+                        Span.text(releaseDate, classes: ["detail-value"]),
+                      ],
+                    ),
+                    Span.text("${translations["tags"]}:", classes: ["detail-key"]),
+                    UnorderedList(items: tags.map(ListItem.text), classes: ["tags"]),
+                  ],
+                ),
+                Div(
+                  classes: ["left-column"],
+                  children: [],
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     ),
   );
 
-  elements.add(Hr());
-
   final fileAbout = File(p.join(dirGame.path, "about.md"));
   final about = fileAbout.readAsStringSync();
   final mdAbout = markdown(about);
+
   elements.add(
     Div(
-      classes: ["about", "page-content"],
+      classes: ["middle-page", "page-content"],
       children: [
-        H2.text(translations["about-game"]),
-        ...mdAbout,
+        Div(
+          classes: ["right-column", "game-metadata"],
+          children: [],
+        ),
+        Div(
+          classes: ["left-column", "game-description-column"],
+          children: [
+            Div(
+              classes: ["about"],
+              children: [
+                H2.text(translations["about-game"]),
+                ...mdAbout,
+              ],
+            ),
+          ],
+        ),
       ],
     ),
   );
