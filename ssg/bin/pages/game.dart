@@ -156,25 +156,27 @@ Future<Main> _generateMain(
   );
 
   final filePrice = File(p.join(dirGame.path, "price.txt"));
-  final String price = filePrice.readAsStringSync().trim();
+  Div? buyArea;
+  if (filePrice.existsSync()) {
+    final String price = filePrice.readAsStringSync().trim();
+    buyArea = Div(
+      classes: ["buy-area"],
+      children: [
+        H2.text(translations["buy-area"].replaceAll("{game}", title)),
+        Div(
+          classes: ["buy-action"],
+          children: [
+            Span.text(price, classes: ["buy-price"]),
+            Span.text(translations["buy-add-to-cart"], classes: ["buy-add-to-cart"]),
+          ],
+        ),
+      ],
+    );
+  }
 
   final fileAbout = File(p.join(dirGame.path, "about.md"));
   final about = fileAbout.readAsStringSync();
   final mdAbout = markdown(about);
-
-  final buyArea = Div(
-    classes: ["buy-area"],
-    children: [
-      H2.text(translations["buy-area"].replaceAll("{game}", title)),
-      Div(
-        classes: ["buy-action"],
-        children: [
-          Span.text(price, classes: ["buy-price"]),
-          Span.text(translations["buy-add-to-cart"], classes: ["buy-add-to-cart"]),
-        ],
-      ),
-    ],
-  );
 
   elements.add(
     Div(
@@ -187,7 +189,7 @@ Future<Main> _generateMain(
         Div(
           classes: ["left-column", "game-description-column"],
           children: [
-            buyArea,
+            ?buyArea,
             Div(
               classes: ["about"],
               children: [

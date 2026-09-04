@@ -106,7 +106,16 @@ ListItem _gameCard({
   final String releaseDate = fileReleaseDate.readAsStringSync().trim();
 
   final filePrice = File(p.join(dir.path, "price.txt"));
-  final String price = filePrice.readAsStringSync().trim();
+  Div? priceTag;
+  if (filePrice.existsSync()) {
+    final String price = filePrice.readAsStringSync().trim();
+    priceTag = Div(
+      classes: ["game-content-column", "game-price"],
+      children: [
+        P.text(price),
+      ],
+    );
+  }
 
   return ListItem(
     children: [
@@ -126,12 +135,7 @@ ListItem _gameCard({
                   P.text("${translations["released"]}: $releaseDate", classes: ["released"]),
                 ],
               ),
-              Div(
-                classes: ["game-content-column", "game-price"],
-                children: [
-                  P.text(price),
-                ],
-              ),
+              ?priceTag,
             ],
           ),
         ],
