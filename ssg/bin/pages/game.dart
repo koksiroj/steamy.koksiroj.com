@@ -167,7 +167,7 @@ Future<Main> _generateMain(
           classes: ["buy-action"],
           children: [
             Span.text(price, classes: ["buy-price"]),
-            Span.text(translations["buy-add-to-cart"], classes: ["buy-add-to-cart"]),
+            Span.text(translations["buy-add-to-cart"], classes: ["btn_green_steamui"]),
           ],
         ),
       ],
@@ -189,6 +189,32 @@ Future<Main> _generateMain(
         Div(
           classes: ["left-column", "game-description-column"],
           children: [
+            Div(
+              classes: ["coming-area"],
+              children: [
+                Div(
+                  classes: ["coming-content"],
+                  children: [
+                    Span.text(translations["this-game-is-not-available"], classes: ["not-yet"]),
+                    H2.text(translations["coming"]),
+                  ],
+                ),
+                Div(
+                  classes: ["coming-wishlist"],
+                  children: [
+                    Span(
+                      classes: ["wishlist-note"],
+                      children: [
+                        T(translations["wishlist-note-line1"]),
+                        Br(),
+                        T(translations["wishlist-note-line2"]),
+                      ],
+                    ),
+                    Span.text(translations["wishlist-button"], classes: ["btn_green_steamui"]),
+                  ],
+                ),
+              ],
+            ),
             ?buyArea,
             Div(
               classes: ["about"],

@@ -215,6 +215,50 @@ h2 {
 	color: #acb2b8;
 }
 
+.coming-area {
+	color: #d5d6d8;
+	margin-bottom: 28px;
+	background: linear-gradient(135deg, rgba(64, 120, 152, 0.4) 10%, rgba(102, 192, 244, 0.4) 100%);
+	box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.4);
+	border-radius: 4px;
+
+	font-size: 13px;
+}
+
+.coming-content {
+	overflow: hidden;
+	padding: 12px 16px;
+	min-height: 38px;
+	position: relative;
+}
+
+.coming-content .not-yet {
+	color: #90aabb;
+}
+
+.coming-content h2 {
+	font-size: 24px;
+	font-weight: normal;
+	color: #d5d6d8;
+	line-height: 28px;
+	background: none;
+	margin: 0;
+}
+
+.coming-wishlist {
+	min-height: 32px;
+	padding: 16px;
+	color: #90a0ad;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	background: linear-gradient(135deg, rgba(15, 28, 36, 0.4) 10%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.wishlist-note {
+	line-height: 15px;
+}
+
 
 .buy-area {
 	margin-bottom: 28px;
@@ -266,7 +310,7 @@ h2 {
 	padding-right: 12px;
 }
 
-.buy-add-to-cart {
+.btn_green_steamui {
 	padding: 0 15px;
 	margin: 1px;
 	font-size: 15px;
@@ -281,7 +325,7 @@ h2 {
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
-.buy-add-to-cart:hover {
+.btn_green_steamui:hover {
 	text-decoration: none !important;
 	color: #fff;
 

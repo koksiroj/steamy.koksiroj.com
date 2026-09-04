@@ -17,6 +17,13 @@ released: Uitgegeven
 release-date: Uitgavedatum
 tags: Tags
 
+# Coming never
+this-game-is-not-available: Dit spel is niet beschikbaar op Steamy
+coming: Nooit verwacht
+wishlist-note-line1: Geïnteresseerd?
+wishlist-note-line2: Voeg het toe aan je verlanglijst en ontvang een melding wanneer het beschikbaar is.
+wishlist-button: Toevoegen aan verlanglijst
+
 # Buy button
 #  The `{game}` is a placeholder that'll be replaced with the game's title.txt
 #  This is to allow for languages that have opposite word order, like `{game} to be bought` or something.

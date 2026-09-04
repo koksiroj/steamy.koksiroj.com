@@ -17,6 +17,13 @@ released: Released
 release-date: Release Date
 tags: Tags
 
+# Coming never
+this-game-is-not-available: This game is not available on Steamy
+coming: Coming never
+wishlist-note-line1: Interested?
+wishlist-note-line2: Add to your wishlist and get notified when it becomes available.
+wishlist-button: Add to your wishlist
+
 # Buy button
 #  The `{game}` is a placeholder that'll be replaced with the game's title.txt
 #  This is to allow for languages that have opposite word order, like `{game} to be bought` or something.
