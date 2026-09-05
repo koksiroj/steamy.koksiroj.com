@@ -41,8 +41,6 @@ jobs:
 
       - name: Build the Website
         run: dart run ssg/bin/main.dart
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
