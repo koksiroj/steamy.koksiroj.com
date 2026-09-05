@@ -12,6 +12,7 @@ breadcrumb-all-games: All Games
 
 # Store page's release date
 released: Released
+coming-soon: Coming soon
 
 # Labels for the game highlights' details
 release-date: Release Date

@@ -86,7 +86,9 @@ Future<Main> _generateMain(
   final description = fileDescription.readAsStringSync().trim();
 
   final fileReleaseDate = File(p.join(dirGame.path, "release_date.txt"));
-  final String releaseDate = fileReleaseDate.readAsStringSync().trim();
+  final String? releaseDate = fileReleaseDate.existsSync()
+      ? fileReleaseDate.readAsStringSync().trim()
+      : null;
 
   final fileTags = File(p.join(dirGame.path, "tags.txt"));
   final tags = fileTags.readAsStringSync().trim().split(",").map((e) => e.trim());
@@ -138,7 +140,10 @@ Future<Main> _generateMain(
                       classes: ["detail"],
                       children: [
                         Span.text("${translations["release-date"]}:", classes: ["detail-key"]),
-                        Span.text(releaseDate, classes: ["detail-value"]),
+                        Span.text(
+                          releaseDate ?? translations["coming-soon"],
+                          classes: ["detail-value"],
+                        ),
                       ],
                     ),
                     Span.text("${translations["tags"]}:", classes: ["detail-key"]),

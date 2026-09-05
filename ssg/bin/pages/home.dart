@@ -103,7 +103,9 @@ ListItem _gameCard({
   final String tags = fileTags.readAsStringSync().trim();
 
   final fileReleaseDate = File(p.join(dir.path, "release_date.txt"));
-  final String releaseDate = fileReleaseDate.readAsStringSync().trim();
+  final String? releaseDate = fileReleaseDate.existsSync()
+      ? fileReleaseDate.readAsStringSync().trim()
+      : null;
 
   final filePrice = File(p.join(dir.path, "price.txt"));
   Div? priceTag;
@@ -132,7 +134,12 @@ ListItem _gameCard({
                 children: [
                   H3.text(title),
                   P.text(tags, classes: ["tags"]),
-                  P.text("${translations["released"]}: $releaseDate", classes: ["released"]),
+                  P.text(
+                    releaseDate == null
+                        ? translations["coming-soon"]
+                        : "${translations["released"]}: $releaseDate",
+                    classes: ["released"],
+                  ),
                 ],
               ),
               ?priceTag,
