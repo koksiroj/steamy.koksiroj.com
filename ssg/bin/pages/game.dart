@@ -4,6 +4,7 @@ import "package:path/path.dart" as p;
 import "package:ssg/components/head.dart";
 import "package:ssg/components/header.dart";
 import "package:ssg/constants.dart";
+import "package:ssg/key_value_file.dart";
 import "package:ssg/languages.dart";
 import "package:techs_html_bindings/elements.dart";
 import "package:techs_html_bindings/markdown.dart";
@@ -34,7 +35,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
   final title = fileTitle.readAsStringSync().trim();
   final fileDescription = File(p.join(dirGame.path, "description.txt"));
   final description = fileDescription.readAsStringSync().trim();
-  final translations = Translations(File(p.join(language.directory.path, "translations.yaml")));
+  final translations = KeyValueFile(File(p.join(language.directory.path, "translations.yaml")));
 
   final String indexHTML = HTML(
     lang: language.code,
@@ -53,7 +54,7 @@ Future<Body> _generateBody(
   Directory dirGame,
   Directory dirBuildGame,
   Language language,
-  Translations translations,
+  KeyValueFile translations,
 ) async {
   final List<A> otherLanguages = [];
   for (final Language language in languages) {
@@ -77,7 +78,7 @@ Future<Body> _generateBody(
 Future<Main> _generateMain(
   Directory dirGame,
   Directory dirBuildGame,
-  Translations translations,
+  KeyValueFile translations,
 ) async {
   final fileTitle = File(p.join(dirGame.path, "title.txt"));
   final title = fileTitle.readAsStringSync().trim();

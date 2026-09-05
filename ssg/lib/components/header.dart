@@ -1,9 +1,10 @@
+import "package:ssg/key_value_file.dart";
 import "package:ssg/languages.dart";
 import "package:techs_html_bindings/elements.dart";
 
 Header generateHeader(
   Language language,
-  Translations translations, {
+  KeyValueFile translations, {
   List<A> languageLinks = const [],
 }) {
   if (languageLinks.length > 1) {

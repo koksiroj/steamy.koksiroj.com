@@ -4,6 +4,7 @@ import "package:path/path.dart" as p;
 import "package:ssg/components/head.dart";
 import "package:ssg/components/header.dart";
 import "package:ssg/constants.dart";
+import "package:ssg/key_value_file.dart";
 import "package:ssg/languages.dart";
 import "package:techs_html_bindings/elements.dart";
 
@@ -51,7 +52,7 @@ Body _generateBody(Language language) {
     }
     return 0;
   });
-  final translations = Translations(File(p.join(language.directory.path, "translations.yaml")));
+  final translations = KeyValueFile(File(p.join(language.directory.path, "translations.yaml")));
   return Body(
     header: generateHeader(
       language,
@@ -97,7 +98,7 @@ ListItem _gameCard({
   required String title,
   required String link,
   required Directory dir,
-  required Translations translations,
+  required KeyValueFile translations,
 }) {
   final fileTags = File(p.join(dir.path, "tags.txt"));
   final String tags = fileTags.readAsStringSync().trim();

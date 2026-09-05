@@ -19,35 +19,3 @@ final List<Language> languages = List.unmodifiableOf(
     return Language(code: parts[0], display: parts[1], directory: dir);
   }),
 );
-
-class Translations {
-  final File _file;
-  final Map<String, String> _keys;
-
-  new(this._file)
-    : _keys = Map.unmodifiableOf(
-        Map.fromEntries(
-          _file
-              .readAsStringSync()
-              .split("\n")
-              .where((str) => str.trim().isNotEmpty)
-              .where((str) => !str.startsWith(RegExp(r"\s*#|//")))
-              .map(
-                (String line) {
-                  final int colonIndex = line.indexOf(":");
-                  return MapEntry(
-                    line.substring(0, colonIndex).trim(),
-                    line.substring(colonIndex + 1).trim(),
-                  );
-                },
-              ),
-        ),
-      );
-
-  String operator [](String key) {
-    return _keys[key] ??
-        (throw Exception(
-          "Translation File `${_file.path}` did not have a translation for `$key`!",
-        ));
-  }
-}
