@@ -20,8 +20,10 @@ Future<void> createGamesPages() async {
 
 Future<void> _createGamePage(Language language, Directory dirGame) async {
   final name = p.basename(dirGame.path);
-  if (name.contains(RegExp(r"\s"))) {
-    throw Exception("Folder `${dirGame.path}` contains whitespace, which is not allowed in URLs!");
+  if (name.contains(RegExp(r"\W"))) {
+    throw Exception(
+      "Folder `${dirGame.path}` contains characters which are not allowed in URLs! Only `a-zA-Z0-9_` are allowed.",
+    );
   }
   final dirBuildGame = Directory(p.join(dirBuild.path, language.code, name))..createSync();
   final fileCapsuleSmall = File(p.join(dirGame.path, "store_capsule_small.jpg"));
