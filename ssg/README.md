@@ -1,6 +1,6 @@
 # Custom Static Site Generator for the Steamy Website
 
-Written in Dart.
+Written in [Dart](https://dart.dev/), so make sure you have that installed if you're planning on building the site locally.
 
 - `bin` contains the code that generates the actual pages
 - `lib` contains functions to generate components, utilities, and shared variables
