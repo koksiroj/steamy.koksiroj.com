@@ -16,7 +16,14 @@ coming-soon: Binnenkort verwacht
 
 # Labels for the game highlights' details
 release-date: Uitgavedatum
+developer: Ontwikkelaar
+publisher: Uitgever
 tags: Tags
+
+# Sidebar
+title: Titel
+genre: Genre
+franchise: Franchise
 
 # Coming never
 this-game-is-not-available: Dit spel is niet beschikbaar op Steamy

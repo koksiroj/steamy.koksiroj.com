@@ -189,8 +189,63 @@ ul.tags {
 .middle-page .right-column {
 	margin-top: 16px;
 	width: 33%;
-	background-color: #000;
 }
+
+.middle-page .right-column section {
+	background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 5%, rgba(0, 0, 0, 0.65) 95%);
+	backdrop-filter: blur(7px);
+	padding: 16px;
+	margin-bottom: 8px;
+	margin-top: 0;
+}
+
+.middle-page .right-column .game-details .detail {
+	color: #8f98a0;
+	line-height: 20px;
+	font-size: 12px;
+}
+
+.middle-page .right-column .game-details .detail-key {
+	color: #798a95;
+	text-transform: uppercase;
+	font-size: 11px;
+}
+
+.detail + .linkbar {
+	margin-top: 14px;
+}
+
+.game-details .linkbar {
+	min-height: 17px;
+	padding-top: 4px;
+	padding-inline-start: 8px;
+	padding-bottom: 4px;
+	line-height: 17px;
+	background: rgba(103, 193, 245, 0.1);
+	color: #67c1f5;
+	border-radius: 1px;
+	display: block;
+	margin-bottom: 2px;
+	font-size: 12px;
+}
+
+.game-details .linkbar > span {
+	padding-inline: 3.5px;
+}
+
+.game-details a.linkbar:hover {
+	color: #ffffff;
+	background: linear-gradient(135deg, #67c1f5 0%, #417a9b 100%);
+}
+
+.game-details .linkbar > img:not([alt="External"]) {
+	max-width: 12px;
+	max-height: 12px;
+	padding-inline-end: 4px;
+	vertical-align: middle;
+	filter: invert(); /*to make the black icon white*/
+}
+
 
 h2 {
 	font-size: 14px;

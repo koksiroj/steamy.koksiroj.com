@@ -97,6 +97,8 @@ Future<Main> _generateMain(
   final fileBreadcrumb = File(p.join(dirGame.path, "breadcrumb.txt"));
   final breadcrumb = fileBreadcrumb.readAsStringSync().trim();
 
+  final sidebar = KeyValueFile(File(p.join(dirGame.path, "sidebar.yaml")));
+
   final List<Element> elements = [];
 
   elements.add(
@@ -137,15 +139,18 @@ Future<Main> _generateMain(
                   children: [
                     Image(src: "store_capsule_header.jpg", alt: ""),
                     P.text(description),
-                    Div(
-                      classes: ["detail"],
-                      children: [
-                        Span.text("${translations["release-date"]}:", classes: ["detail-key"]),
-                        Span.text(
-                          releaseDate ?? translations["coming-soon"],
-                          classes: ["detail-value"],
-                        ),
-                      ],
+                    _detail(
+                      "${translations["release-date"]}:",
+                      releaseDate ?? translations["coming-soon"],
+                    ),
+                    _detail(
+                      "${translations["developer"]}:",
+                      sidebar["developer"],
+                    ),
+                    _detail(
+                      "${translations["publisher"]}:",
+                      sidebar["publisher"],
+                      topMargin: false,
                     ),
                     Span.text("${translations["tags"]}:", classes: ["detail-key"]),
                     UnorderedList(items: tags.map(ListItem.text), classes: ["tags"]),
@@ -192,7 +197,24 @@ Future<Main> _generateMain(
       children: [
         Div(
           classes: ["right-column", "game-metadata"],
-          children: [],
+          children: [
+            Section(
+              classes: ["game-details"],
+              children: [
+                _detail("${translations["title"]}:", title),
+                _detail("${translations["genre"]}:", sidebar["genre"]),
+                _detail("${translations["developer"]}:", sidebar["developer"]),
+                _detail("${translations["publisher"]}:", sidebar["publisher"]),
+                if (sidebar.optional("franchise") != null)
+                  _detail("${translations["franchise"]}:", sidebar["franchise"]),
+                _detail(
+                  "${translations["release-date"]}:",
+                  releaseDate ?? translations["coming-soon"],
+                ),
+                ..._sidebarButtons(sidebar),
+              ],
+            ),
+          ],
         ),
         Div(
           classes: ["left-column", "game-description-column"],
@@ -241,6 +263,8 @@ Future<Main> _generateMain(
   final List<Image> images = [];
   elements.collectOfType(into: images);
   for (final Image img in images) {
+    if (img.src.contains("icons/")) continue;
+    if (img.src.contains("steam_assets/")) continue;
     final uri = Uri.parse(img.src);
     if (uri.scheme.isNotEmpty) continue;
     final imgFile = File(p.join(dirGame.path, img.src));
@@ -270,4 +294,47 @@ Future<Main> _generateMain(
   }
 
   return Main(children: elements);
+}
+
+Div _detail(String key, String value, {bool topMargin = true}) {
+  return Div(
+    classes: ["detail"],
+    inlineStyles: topMargin ? null : ["margin-top: 0"],
+    children: [
+      Span.text(key, classes: ["detail-key"]),
+      Span.text(value, classes: ["detail-value"]),
+    ],
+  );
+}
+
+List<A> _sidebarButtons(KeyValueFile sidebar) {
+  final values = sidebar.getWithPrefix("link-");
+  return values.entries.map((entry) {
+    final key = entry.key;
+    const iconPrefix = "icon-";
+    if (key.startsWith(iconPrefix)) {
+      final text = key.replaceFirst(iconPrefix, "");
+      final path = "/icons/$text.svg";
+      final file = File(p.joinAll(["ssg", "copy", ...path.split("/")]));
+      if (!file.existsSync()) {
+        throw Exception(
+          "Sidebar ${sidebar.toString(showKeys: false)} requests an icon file `${file.path}`, but it was not found!",
+        );
+      }
+      return A(
+        href: entry.value,
+        classes: ["linkbar"],
+        children: [
+          Image(src: path, alt: text),
+          Span.text(text),
+          Image(src: "/steam_assets/ico_external_link.gif", alt: "External"),
+        ],
+      );
+    }
+    return A.text(
+      key.replaceAll("-", " "),
+      classes: ["linkbar"],
+      href: entry.value,
+    );
+  }).toList();
 }

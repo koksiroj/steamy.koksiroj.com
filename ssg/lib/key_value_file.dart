@@ -29,4 +29,27 @@ class KeyValueFile {
           "Key-Value File `${_file.path}` did not have a key named `$key`!",
         ));
   }
+
+  String? optional(String key) {
+    return _keys[key];
+  }
+
+  LinkedHashMap<String, String> getWithPrefix(String prefix) {
+    final LinkedHashMap<String, String> result = LinkedHashMap<String, String>();
+    _keys.forEach((String key, String value) {
+      if (key.startsWith(prefix)) {
+        result[key.replaceFirst(prefix, "")] = value;
+      }
+    });
+    return result;
+  }
+
+  @override
+  String toString({bool showKeys = true}) {
+    if (showKeys) {
+      return "KeyValueFile(file: `${_file.path}`, keys: $_keys)";
+    } else {
+      return "KeyValueFile(file: `${_file.path}`)";
+    }
+  }
 }

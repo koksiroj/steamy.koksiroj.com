@@ -16,7 +16,14 @@ coming-soon: Coming soon
 
 # Labels for the game highlights' details
 release-date: Release Date
+developer: Developer
+publisher: Publisher
 tags: Tags
+
+# Sidebar
+title: Title
+genre: Genre
+franchise: Franchise
 
 # Coming never
 this-game-is-not-available: This game is not available on Steamy

@@ -1,0 +1,24 @@
+# Metadata
+#title is in `title.txt`
+genre: Indie, Strategie
+developer: Heckmouse
+publisher: Mystic Forge
+#franchise: optional, disabled here
+#release date is in `release-date.txt`
+
+# Buttons
+#  There are two types of buttons: `link-icon` and `link`
+#  The part after the button type will be the text on the button (dashes are replaced with spaces)
+#  link-icon will look up an SVG icon from `ssg/copy/icons/` by the button text
+link-icon-Discord: https://discord.gg/EvUHSAQVAN
+link-icon-TikTok: https://www.tiktok.com/@dog.witch
+link-icon-Twitter: https://twitter.com/DOGWITCH_game
+link-icon-Bluesky: https://bsky.app/profile/dogwitchgame.bsky.social
+link-icon-Instagram: https://www.instagram.com/dog_witch_official/
+link-icon-Reddit: https://www.reddit.com/r/DOGWITCHgame/
+link-icon-QQ: https://qm.qq.com/q/MLdQ4ZxUII
+link-icon-Bilibili: https://space.bilibili.com/3632311654419044
+link-Updategeschiedenis-weergeven: https://store.steampowered.com/newshub/?appids=3548520
+link-Gerelateerd-nieuws-lezen: https://store.steampowered.com/newshub/app/3548520
+link-Discussies-bekijken: https://steamcommunity.com/app/3548520/discussions/
+link-Communitygroepen-zoeken: https://steamcommunity.com/actions/Search?T=ClanAccount&K=DOG%20WITCH
