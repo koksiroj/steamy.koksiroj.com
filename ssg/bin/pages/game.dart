@@ -4,6 +4,7 @@ import "package:path/path.dart" as p;
 import "package:ssg/components/head.dart";
 import "package:ssg/components/header.dart";
 import "package:ssg/constants.dart";
+import "package:ssg/copy.dart";
 import "package:ssg/key_value_file.dart";
 import "package:ssg/languages.dart";
 import "package:techs_html_bindings/elements.dart";
@@ -43,7 +44,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
       title: "$title | Steamy",
       description: description,
       extraStyles: ["header", "game"],
-      scriptFiles: ["/lang-select.js"],
+      scriptFiles: ["/lang-select.js", "/carousel.js"],
     ),
     body: await _generateBody(dirGame, dirBuildGame, language, translations),
   ).build();
@@ -158,7 +159,7 @@ Future<Main> _generateMain(
                 ),
                 Div(
                   classes: ["left-column"],
-                  children: [],
+                  children: [_carousel(dirGame, dirBuildGame)],
                 ),
               ],
             ),
@@ -265,6 +266,7 @@ Future<Main> _generateMain(
   for (final Image img in images) {
     if (img.src.contains("icons/")) continue;
     if (img.src.contains("steam_assets/")) continue;
+    if (img.src.contains("/carousel/")) continue;
     final uri = Uri.parse(img.src);
     if (uri.scheme.isNotEmpty) continue;
     final imgFile = File(p.join(dirGame.path, img.src));
@@ -337,4 +339,68 @@ List<A> _sidebarButtons(KeyValueFile sidebar) {
       href: entry.value,
     );
   }).toList();
+}
+
+Div _carousel(Directory dirGame, Directory dirBuildGame) {
+  final dirCarousel = Directory(p.join(dirGame.path, "carousel"));
+  if (!dirCarousel.existsSync()) {
+    throw Exception(
+      "Tried making a carousel for `${dirCarousel.path}`, but that folder does not exist!",
+    );
+  }
+  final files = dirCarousel.listSync().whereType<File>().toList();
+  if (files.isEmpty) {
+    throw Exception(
+      "Tried making a carousel for `${dirCarousel.path}`, but that folder is empty!",
+    );
+  }
+  files.sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
+
+  final dirBuildCarousel = Directory(p.join(dirBuildGame.path, "carousel"))..createSync();
+  final dest = p.joinAll(p.split(dirBuildCarousel.path)..removeAt(0));
+  copy(dirCarousel.path, dest);
+
+  const youtubeThumbnailPrefix = "https://img.youtube.com/vi";
+  final List<Image> items = [];
+  for (final file in files) {
+    final String filename = p.basename(file.path);
+    final int firstPeriodIndex = filename.indexOf(".");
+    final String ext = filename.substring(firstPeriodIndex + 1).trim();
+
+    switch (ext) {
+      case "jpg":
+      case "jpeg":
+      case "png":
+      case "webp":
+        items.add(Image(src: "/${dest.replaceAll(r"\", "/")}/$filename", alt: ""));
+      case "yt.txt":
+        final String fileContent = file.readAsStringSync().trim();
+        items.add(Image(src: "$youtubeThumbnailPrefix/$fileContent/default.jpg", alt: ""));
+      default:
+        throw Exception(
+          "Tried putting `${file.path}` into a carousel, but it's of an unknown file type!",
+        );
+    }
+  }
+
+  return Div(
+    classes: ["carousel"],
+    children: [
+      Div(
+        classes: ["carousel-slideshow"],
+        children: [],
+      ),
+      OrderedList(
+        classes: ["carousel-preview"],
+        items: items.map(
+          (e) => ListItem(
+            children: [e],
+            classes: [
+              if (e.src.startsWith(youtubeThumbnailPrefix)) "video",
+            ],
+          ),
+        ),
+      ),
+    ],
+  );
 }
