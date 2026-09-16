@@ -5,7 +5,7 @@ repository: https://github.com/koksiroj/steamy.koksiroj.com
 publish_to: none
 
 environment:
-  sdk: ^3.13.1
+  sdk: ^3.13.3
 
 dependencies:
   logging: ^1.3.0

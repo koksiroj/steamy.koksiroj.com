@@ -42,7 +42,7 @@ Head generateHead({
 class ScriptFile extends Style {
   String src;
 
-  ScriptFile({required this.src}) : super(css: "");
+  new({required this.src}) : super(css: "");
 
   @override
   String build() {
