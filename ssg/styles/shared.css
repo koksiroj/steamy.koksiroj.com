@@ -9,10 +9,18 @@
 
 html {
 	color: rgb(172, 178, 184);
+	height: 100%;
 }
 
 body {
 	font-family: "Motiva Sans", "Arial", "Helvetica", "Noto Sans", "Twemoji", sans-serif;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+footer {
+	margin-top: auto;
 }
 
 a {

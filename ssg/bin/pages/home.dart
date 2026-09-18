@@ -1,6 +1,7 @@
 import "dart:io";
 
 import "package:path/path.dart" as p;
+import "package:ssg/components/footer.dart";
 import "package:ssg/components/head.dart";
 import "package:ssg/components/header.dart";
 import "package:ssg/constants.dart";
@@ -20,7 +21,7 @@ void _createHomePage(Language language) {
     head: generateHead(
       title: "Steamy Store",
       description: "",
-      extraStyles: ["header", "home"],
+      extraStyles: ["header", "home", "footer"],
       scriptFiles: ["/lang-select.js"],
     ),
     body: _generateBody(language),
@@ -90,7 +91,7 @@ Body _generateBody(Language language) {
         ),
       ],
     ),
-    footer: Footer(children: []),
+    footer: generateFooter(),
   );
 }
 

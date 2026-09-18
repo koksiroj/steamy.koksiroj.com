@@ -1,4 +1,10 @@
+header {
+	/* The footer has a margin-top: auto, so with this, we can center the languages */
+	margin-bottom: auto;
+}
+
 .langs {
 	list-style-type: none;
 	text-align: center;
+	line-height: 1.5;
 }

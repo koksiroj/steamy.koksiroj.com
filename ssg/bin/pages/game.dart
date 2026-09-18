@@ -2,6 +2,7 @@ import "dart:collection";
 import "dart:io";
 
 import "package:path/path.dart" as p;
+import "package:ssg/components/footer.dart";
 import "package:ssg/components/head.dart";
 import "package:ssg/components/header.dart";
 import "package:ssg/constants.dart";
@@ -44,7 +45,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
     head: generateHead(
       title: "$title | Steamy",
       description: description,
-      extraStyles: ["header", "game"],
+      extraStyles: ["header", "game", "footer"],
       scriptFiles: ["/lang-select.js", "/carousel.js", "/sysreq.js"],
     ),
     body: await _generateBody(dirGame, dirBuildGame, language, translations),
@@ -73,7 +74,7 @@ Future<Body> _generateBody(
   return Body(
     header: generateHeader(language, translations, languageLinks: otherLanguages),
     main: await _generateMain(dirGame, dirBuildGame, translations),
-    footer: Footer(children: []),
+    footer: generateFooter(),
   );
 }
 
