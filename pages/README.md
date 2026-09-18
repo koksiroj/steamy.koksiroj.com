@@ -55,5 +55,6 @@ In addition to the files mentioned above, Steamy pages **need** these files:
 - `store_capsule_header.jpg`: The image that is shown in the top section, above the description, next to the carousel.
 - `carousel/`: A folder with image files that will be shown in the game's carousel.
   Most common image formats are supported.  
-  The items in the carousel will be sorted alphabetically. (I recommend naming them with numbers, like `01.jpg`, `01.jpg`, etc.)  
-  May also contain a `.yt.txt` file, which should contain the YouTube video ID of a video to be shown in the carousel.
+  The items in the carousel will be sorted alphabetically.
+  (I recommend naming them with numbers, like `01.jpg`, `01.jpg`, etc.)  
+  May also contain `.yt.txt` files, which should contain the YouTube video ID of a video to be shown in the carousel.
