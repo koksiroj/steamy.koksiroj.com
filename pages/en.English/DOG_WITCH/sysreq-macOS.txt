@@ -1,0 +1,10 @@
+Minimum:
+OS: Mac OSX 10.7 and above
+Processor: 1,3GHz
+Memory: 1 GB RAM
+Graphics: 1GB Video Memory
+Storage: 1 GB available space
+
+---
+
+Recommended:

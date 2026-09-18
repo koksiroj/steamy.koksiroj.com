@@ -58,3 +58,7 @@ In addition to the files mentioned above, Steamy pages **need** these files:
   The items in the carousel will be sorted alphabetically.
   (I recommend naming them with numbers, like `01.jpg`, `01.jpg`, etc.)  
   May also contain `.yt.txt` files, which should contain the YouTube video ID of a video to be shown in the carousel.
+- `sysreq-*.txt`: The system requirements for the game. The `*` here is a placeholder for the platform name.  
+  You can have as many of these as you like.  
+  In the text file, the columns (Minimum/Recommended) are separated by a line with just `---`
+  (with blank lines surrounding that).

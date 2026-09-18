@@ -467,3 +467,71 @@ h2 {
 	display: block;
 	max-width: 100%;
 }
+
+.system-requirements h2 {
+	margin-bottom: 0;
+}
+
+.system-requirements {
+	font-size: 12px;
+}
+
+.system-requirements strong {
+	font-weight: normal;
+	font-size: 12px;
+	color: #bcc6cd;
+	text-transform: uppercase;
+	display: inline-block;
+	margin-inline-end: 4px;
+	margin-bottom: 2px;
+}
+
+.system-requirements .tabs {
+	font-size: 0;
+	padding-top: 8px;
+	padding-inline-start: 5px;
+	margin-bottom: 15px;
+	background: linear-gradient(to right, rgba(58, 110, 139, 0.2) 0%, rgba(58, 110, 139, 0) 100%);
+}
+
+.system-requirements .tab {
+	font-size: 12px;
+	padding-inline: 10px;
+	line-height: 20px;
+	margin-inline-end: 10px;
+	color: #3b6e8c;
+	cursor: pointer;
+	display: inline-block;
+	height: 20px;
+}
+
+.system-requirements .tab:hover {
+	color: #ffffff;
+}
+
+.system-requirements .tab.active {
+	background-color: #18222e;
+	color: #67c1f5;
+}
+
+.system-requirements .platform {
+	display: none;
+}
+
+.system-requirements .platform.active {
+	display: flex;
+	gap: 8px;
+}
+
+.system-requirements .level {
+	flex-basis: 300px;
+}
+
+.system-requirements .level ul {
+	line-height: 18px;
+}
+
+.system-requirements .level li {
+	margin: 2px 0;
+	list-style-type: none;
+}

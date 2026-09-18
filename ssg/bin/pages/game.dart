@@ -1,3 +1,4 @@
+import "dart:collection";
 import "dart:io";
 
 import "package:path/path.dart" as p;
@@ -44,7 +45,7 @@ Future<void> _createGamePage(Language language, Directory dirGame) async {
       title: "$title | Steamy",
       description: description,
       extraStyles: ["header", "game"],
-      scriptFiles: ["/lang-select.js", "/carousel.js"],
+      scriptFiles: ["/lang-select.js", "/carousel.js", "/sysreq.js"],
     ),
     body: await _generateBody(dirGame, dirBuildGame, language, translations),
   ).build();
@@ -254,6 +255,7 @@ Future<Main> _generateMain(
                 ...mdAbout,
               ],
             ),
+            _systemRequirements(translations, dirGame),
           ],
         ),
       ],
@@ -401,6 +403,70 @@ Div _carousel(Directory dirGame, Directory dirBuildGame) {
           ),
         ),
       ),
+    ],
+  );
+}
+
+Div _systemRequirements(
+  KeyValueFile translations,
+  Directory dirGame,
+) {
+  final files = dirGame.listSync().whereType<File>().where(
+    (f) => p.basename(f.path).startsWith("sysreq-"),
+  );
+  final LinkedHashMap<String, Div> platforms = LinkedHashMap();
+  for (final file in files) {
+    final fileName = p.basename(file.path);
+    final platformName = fileName
+        .replaceFirst(RegExp(r"^sysreq-"), "")
+        .replaceFirst(RegExp(r"\.txt$"), "");
+    final strLevels = file.readAsStringSync().split("\n---\n\n");
+    final List<Div> levels = [];
+    for (final strLevel in strLevels) {
+      final lines = strLevel.trim().split("\n");
+      final firstLine = lines.removeAt(0);
+
+      final List<ListItem> items = [];
+      for (final line in lines) {
+        final int colonIndex = line.indexOf(":");
+        if (colonIndex < 0) {
+          items.add(ListItem.text(line));
+        } else {
+          items.add(
+            ListItem(
+              children: [
+                Strong.text("${line.substring(0, colonIndex).trim()}:"),
+                T(line.substring(colonIndex + 1).trim()),
+              ],
+            ),
+          );
+        }
+      }
+
+      levels.add(
+        Div(
+          classes: ["level"],
+          children: [
+            Strong.text(firstLine),
+            UnorderedList(items: items),
+          ],
+        ),
+      );
+    }
+    platforms[platformName] = Div(children: levels, classes: ["platform"]);
+  }
+  final List<Span> tabs = [];
+  if (platforms.isNotEmpty) {
+    platforms.values.first.classes = [...?platforms.values.first.classes, "active"];
+    tabs.addAll(platforms.keys.map((e) => Span.text(e, classes: ["tab"])));
+    tabs.first.classes = [...?tabs.first.classes, "active"];
+  }
+  return Div(
+    classes: ["system-requirements"],
+    children: [
+      H2.text(translations["system-requirements"]),
+      Div(classes: ["tabs"], children: tabs),
+      ...platforms.values,
     ],
   );
 }
