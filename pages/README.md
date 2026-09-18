@@ -60,5 +60,7 @@ In addition to the files mentioned above, Steamy pages **need** these files:
   May also contain `.yt.txt` files, which should contain the YouTube video ID of a video to be shown in the carousel.
 - `sysreq-*.txt`: The system requirements for the game. The `*` here is a placeholder for the platform name.  
   You can have as many of these as you like.  
+  You may control the order that the platforms appear in by putting a number in front of the platform name, separated by another dash (`-`).
+  If you have only a single platform, you may omit the platform name entirely.
   In the text file, the columns (Minimum/Recommended) are separated by a line with just `---`
   (with blank lines surrounding that).

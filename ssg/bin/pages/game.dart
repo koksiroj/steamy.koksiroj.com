@@ -412,15 +412,26 @@ Div _systemRequirements(
   KeyValueFile translations,
   Directory dirGame,
 ) {
-  final files = dirGame.listSync().whereType<File>().where(
-    (f) => p.basename(f.path).startsWith("sysreq-"),
-  );
+  final files = dirGame
+      .listSync()
+      .whereType<File>()
+      .where((f) => p.basename(f.path).startsWith("sysreq"))
+      .toList();
+  files.sort((a, b) => p.basename(a.path).compareTo(p.basename(b.path)));
   final LinkedHashMap<String, Div> platforms = LinkedHashMap();
   for (final file in files) {
     final fileName = p.basename(file.path);
     final platformName = fileName
-        .replaceFirst(RegExp(r"^sysreq-"), "")
-        .replaceFirst(RegExp(r"\.txt$"), "");
+        .replaceFirst(RegExp(r"^sysreq-?\d*-?"), "")
+        .replaceFirst(RegExp(r"\.txt$"), "")
+        .trim();
+    if (platformName.isEmpty) {
+      if (files.length != 1) {
+        throw Exception(
+          "The file `${file.path}` has no platform name, which is only allowed if it's the ONLY system-requirements file of the game.",
+        );
+      }
+    }
     final strLevels = file.readAsStringSync().split("\n---\n\n");
     final List<Div> levels = [];
     for (final strLevel in strLevels) {
@@ -466,7 +477,7 @@ Div _systemRequirements(
     classes: ["system-requirements"],
     children: [
       H2.text(translations["system-requirements"]),
-      Div(classes: ["tabs"], children: tabs),
+      if (!platforms.containsKey("")) Div(classes: ["tabs"], children: tabs),
       ...platforms.values,
     ],
   );

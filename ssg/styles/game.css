@@ -516,6 +516,7 @@ h2 {
 
 .system-requirements .platform {
 	display: none;
+	margin-top: 10px;
 }
 
 .system-requirements .platform.active {
